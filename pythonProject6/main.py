@@ -59,9 +59,19 @@ def mostarUmproduto(idProduto):
 
 @app.post("/produto/cadastrar/{id}/produto")
 def cadastrarProduto(id: int, item: Produto):
+    id = len(bancoDados)+1
     bancoDados[id]= item
     return {
         "mensagem": "item criado com sucesso",
         "Produto": item,
+        "statusCode": 200
+    }
+
+@app.delete("/produtos/excluir/{id}")
+def excluirProduto(id):
+    del bancoDados[id]
+    return {
+        "mensagem": "Produto excluido",
+        "id produto": id,
         "statusCode": 200
     }
